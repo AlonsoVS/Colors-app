@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './ColorBox.css';
 
 class ColorBox extends Component {
+    state = { 
+        copied: false 
+    }
+    
+    handleCopy = () => {
+        this.setState({ copied: true }, (() => {
+            setTimeout(() => this.setState({ copied: false }), 3000);
+        }))
+    }
+
     render() {
         const { name, background } = this.props;
+        const copied = this.state.copied;
         return(
-            <div style={{ background: background }} className="ColorBox">
-                <div className="copy-container">
-                    <div className="box-content">
-                        <span>{name}</span>
+            <CopyToClipboard text={background} onCopy={this.handleCopy}>
+                <div style={{ background }} className="ColorBox">
+                    <div style={{ background }} class={`copy-overlay ${copied && "show"}`}/>
+                    <div className={`copy-msg ${copied && "show"}`}>
+                        <h1>Copied!</h1>
+                        <p>{background}</p>
                     </div>
-                    <button className="copy-button">Copy</button>
+                    <div className="copy-container">
+                        <div className="box-content">
+                            <span>{name}</span>
+                        </div>
+                        <button className="copy-button">Copy</button>
+                    </div>
+                    <span className="see-more">More</span>
                 </div>
-                <span className="see-more">More</span>
-            </div>
+            </CopyToClipboard>
         );
     }
 }
