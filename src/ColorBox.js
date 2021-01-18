@@ -9,7 +9,7 @@ class ColorBox extends Component {
     
     handleCopy = () => {
         this.setState({ copied: true }, (() => {
-            setTimeout(() => this.setState({ copied: false }), 3000);
+            setTimeout(() => this.setState({ copied: false }), 1500);
         }))
     }
 
