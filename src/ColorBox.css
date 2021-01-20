@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
     font-size: 4rem;
-    transform: scale(0.1);
+    transform: scale(0.0);
     opacity: 0;
     color: white;
 }
