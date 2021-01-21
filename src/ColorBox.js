@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
-import './ColorBox.css';
 import { withStyles } from '@material-ui/core';
 import styles from './styles/ColorBoxStyles';
 
