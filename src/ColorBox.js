@@ -39,6 +39,7 @@ const styles = {
         textTransform: "uppercase"
     },
     copyButton: {
+        color: props => chroma(props.background).luminance() > 0.07 ? "rgba(0, 0, 0, 0.6)" : "white",
         width: "100px",
         height: "30px",
         position: "absolute",
@@ -52,7 +53,6 @@ const styles = {
         background: "rgba(225, 225, 225, 0.3)",
         fontSize: "1rem",
         lineHeight: "30px",
-        color: "white",
         textTransform: "uppercase",
         border: "none",
         textDecoration: "none",
