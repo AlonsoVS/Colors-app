@@ -110,6 +110,18 @@ class NewPaletteForm extends Component {
         this.setState({ open: false });
       };
 
+      handleSavePalette = () => {
+        let newName = "New Test Palette";
+        const newPalette = {
+          paletteName: newName,
+          id: newName.toLowerCase().replace(/ /g, "-"),
+          emoji: "",
+          colors: this.state.colors
+        }
+        this.props.savePalette(newPalette);
+        this.props.history.push("/");
+      };
+
       addNewColor = () => {
         const newColor = {
           color: this.state.currentColor,
@@ -130,6 +142,7 @@ class NewPaletteForm extends Component {
           <div className={classes.root}>
             <CssBaseline />
             <AppBar
+              color="default"
               position="fixed"
               className={classNames(classes.appBar, {
                 [classes.appBarShift]: open,
@@ -147,6 +160,13 @@ class NewPaletteForm extends Component {
                 <Typography variant="h6" color="inherit" noWrap>
                   Persistent drawer
                 </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleSavePalette}
+                  >
+                    Save Palette
+                </Button>
               </Toolbar>
             </AppBar>
             <Drawer
@@ -166,8 +186,8 @@ class NewPaletteForm extends Component {
               <Divider />
               <Typography variant='h4'>Design Your Palette</Typography>
               <div>
-                <Button variant='contained' color='secondary'>Create Palette</Button>
-                <Button variant='contained' color='primary'>Create Color</Button>
+                <Button variant="contained" color="secondary">Create Palette</Button>
+                <Button variant="contained" color="primary">Create Color</Button>
               </div>
               <ChromePicker
                   color={this.state.currentColor}
@@ -184,9 +204,9 @@ class NewPaletteForm extends Component {
                     "Color name must be unique"]}
                 />
                 <Button
-                  type='submit'
-                  variant='contained'
-                  color='primary'
+                  type="submit"
+                  variant="contained"
+                  color="primary"
                   style={{ backgroundColor: this.state.currentColor }}
                   >
                     ADD COLOR
