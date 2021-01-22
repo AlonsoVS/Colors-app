@@ -5,10 +5,13 @@ import { Route, Switch } from 'react-router-dom';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
-  const [state, setState] = useState({palettes: seedColors});
+  const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+  const [state, setState] = useState({palettes: savedPalettes || seedColors});
+
+  useEffect(syncLocalStorage);
 
   function findPallette(id) {
     return state.palettes.find(palette => palette.id === id);
@@ -16,6 +19,10 @@ function App() {
   
   function savePalette(newPalette) {
     setState({ palettes: [ ...state.palettes, newPalette ]});
+  };
+
+  function syncLocalStorage() {
+    window.localStorage.setItem("palettes", JSON.stringify(state.palettes));
   };
 
   return (
