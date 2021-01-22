@@ -26,61 +26,88 @@ const styles = theme => ({
         }),
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
     },
     appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
     menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
+        marginLeft: 12,
+        marginRight: 20,
     },
     navBtns: {
-
+        marginRight: "1rem",
+        "& a": {
+            textDecoration: "none",
+        },
+    },
+    button: {
+        margin: "0 0.5rem",
     },
 });
 
 class PaletteFormNav extends Component {
+    state = {
+        formShowing: false
+    };
+
+    showForm = () => {
+        this.setState({ formShowing: true });
+    };
+
     render() {
         const { classes, open, palettes, handleSavePalette } = this.props;
         return(
             <div className={classes.root}>
                 <CssBaseline />
                 <AppBar
-                color="default"
-                position="fixed"
-                className={classNames(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
+                    color="default"
+                    position="fixed"
+                    className={classNames(classes.appBar, {
+                        [classes.appBarShift]: open,
+                    })}
                 >
-                <Toolbar disableGutters={!open}>
-                    <IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={this.props.handleDrawerOpen}
-                    className={classNames(classes.menuButton, open && classes.hide)}
-                    >
-                    <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Create a Palette
-                    </Typography>
-                </Toolbar>
-                <div className={classes.navBtns}>
-                        <PaletteMetaForm palettes={palettes} handleSavePalette={handleSavePalette} />
+                    <Toolbar disableGutters={!open}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            onClick={this.props.handleDrawerOpen}
+                            className={classNames(classes.menuButton, open && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" color="inherit" noWrap>
+                            Create a Palette
+                        </Typography>
+                    </Toolbar>
+                    <div className={classes.navBtns}>
                         <Link to="/">
                             <Button
-                            variant="contained"
-                            color="secondary"
+                                className={classes.button}
+                                variant="contained"
+                                color="secondary"
                             >
-                            Go Back
+                                Go Back
                             </Button>
                         </Link>
+                        <Button
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                            onClick={this.showForm}
+                            >
+                                Save Palette
+                        </Button>
                     </div>
+                    {this.state.formShowing && <PaletteMetaForm
+                                                    palettes={palettes}
+                                                    handleSavePalette={handleSavePalette}
+                                                />}
                 </AppBar>
             </div>
         );
