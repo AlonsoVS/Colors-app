@@ -7,11 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 
 
 class PaletteMetaForm extends Component {
     state = {
-        open: false,
+        open: this.props.open,
         newPaletteName: "",
       };
 
@@ -24,11 +26,7 @@ class PaletteMetaForm extends Component {
     };
     
     handleClickOpen = () => {
-    this.setState({ open: true });
-    };
-
-    handleClose = () => {
-    this.setState({ open: false });
+        this.setState({ open: true });
     };
 
     handlePaletteNameChange = (event) => {
@@ -36,14 +34,16 @@ class PaletteMetaForm extends Component {
     };
 
     render() {
-        const { newPaletteName } = this.state;
+        const { newPaletteName, open } = this.state;
+        const { hideForm, handleSavePalette } = this.props;
     return (
             <Dialog
-                open={this.state.open}
+                open={open}
                 aria-labelledby="form-dialog-title"
+                onClose={hideForm}
             >
                 <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
-                <ValidatorForm onSubmit={() => this.props.handleSavePalette(newPaletteName)}>
+                <ValidatorForm onSubmit={() => handleSavePalette(newPaletteName)}>
                     <DialogContent>
                         <DialogContentText>
                             Please enter a name for your new beautiful palette. Make sure
@@ -60,11 +60,12 @@ class PaletteMetaForm extends Component {
                             errorMessages={["Enter a Palette Name", "Palette Name already used!"]}
                         /> 
                     </DialogContent>
+                    <Picker />
                     <DialogActions>
                         <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
-                            onClick={this.handleClose}
+                            onClick={hideForm}
                             >
                             Cancel
                         </Button>
