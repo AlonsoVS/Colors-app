@@ -13,6 +13,10 @@ function App() {
 
   useEffect(syncLocalStorage);
 
+  function deletePalette(id) {
+    setState({palettes: state.palettes.filter(palette => palette.id !== id)});
+  };
+
   function findPallette(id) {
     return state.palettes.find(palette => palette.id === id);
   };
@@ -37,7 +41,11 @@ function App() {
           />
         }
       />
-      <Route exact path="/" render={routeProps => <PaletteList palettes={state.palettes} {...routeProps} />}/>
+      <Route
+          exact path="/"
+          render={
+            routeProps => <PaletteList deletePalette={deletePalette} palettes={state.palettes} {...routeProps} />}
+        />
       <Route 
           exact path="/palette/:id" 
           render={ 
