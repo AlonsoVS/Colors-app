@@ -25,7 +25,7 @@ class ColorBox extends Component {
             <CopyToClipboard text={background} onCopy={this.handleCopy}>
                 <div style={{ background }} className={classes.ColorBox}>
                     <div style={{ background }} 
-                         class={`${classes.copyOverlay} ${copied && classes.showCopyOverlay}`}/>
+                         className={`${classes.copyOverlay} ${copied && classes.showCopyOverlay}`}/>
                     <div className={`${classes.copyMessage} ${copied && classes.showCopyMessage}`}>
                         <h1>Copied!</h1>
                         <p className={classes.copyText}>{background}</p>
@@ -36,7 +36,7 @@ class ColorBox extends Component {
                         </div>
                         <button className={classes.copyButton}>Copy</button>
                     </div>
-                    {showingFullPalette && <Link to={`/palette/${paletteId}/${colorId}`} onclick={ e => e.stopPropagation() }>
+                    {showingFullPalette && <Link to={`/palette/${paletteId}/${colorId}`} onClick={ e => e.stopPropagation() }>
                                                 <span className={classes.seeMoreButton}>More</span>
                                             </Link>}
                 </div>
