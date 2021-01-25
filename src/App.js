@@ -44,7 +44,12 @@ function App() {
       <Route
           exact path="/"
           render={
-            routeProps => <PaletteList deletePalette={deletePalette} palettes={state.palettes} {...routeProps} />}
+            routeProps => <PaletteList
+                            deletePalette={deletePalette}
+                            palettes={state.palettes}
+                            {...routeProps}
+                          />
+          }
         />
       <Route 
           exact path="/palette/:id" 
