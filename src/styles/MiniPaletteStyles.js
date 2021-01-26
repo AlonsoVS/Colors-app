@@ -43,6 +43,7 @@ export default {
     deleteIcon: {
         color: "white",
         backgroundColor: "#eb3d30",
+        boxSizing: "initial",
         height: "20px",
         width: "20px",
         position: "absolute",

@@ -38,6 +38,7 @@ class PaletteMetaForm extends Component {
             emoji: emoji.native
         };
         this.props.handleSavePalette(newPalette);
+        this.setState({ stage: "" });
     };
 
     showEmojiPicker = () => {
