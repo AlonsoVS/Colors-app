@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
-import styles from './styles/ColorBoxStyles';
 import classNames from 'classnames';
+import styles from './styles/ColorBoxStyles';
 
 
 class ColorBox extends Component {
@@ -39,7 +39,10 @@ class ColorBox extends Component {
                         </div>
                         <button className={classes.copyButton}>Copy</button>
                     </div>
-                    {showingFullPalette && <Link to={`/palette/${paletteId}/${colorId}`} onClick={ e => e.stopPropagation() }>
+                    {showingFullPalette && <Link 
+                                                to={`/palette/${paletteId}/${colorId}`} 
+                                                onClick={ e => e.stopPropagation() }
+                                            >
                                                 <span className={classes.seeMoreButton}>More</span>
                                             </Link>}
                 </div>
