@@ -3,6 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import styles from './styles/ColorBoxStyles';
+import classNames from 'classnames';
 
 
 class ColorBox extends Component {
@@ -25,7 +26,9 @@ class ColorBox extends Component {
             <CopyToClipboard text={background} onCopy={this.handleCopy}>
                 <div style={{ background }} className={classes.ColorBox}>
                     <div style={{ background }} 
-                         className={`${classes.copyOverlay} ${copied && classes.showCopyOverlay}`}/>
+                         className={classNames(classes.copyOverlay, {
+                             [classes.showCopyOverlay]: copied,
+                         })}/>
                     <div className={`${classes.copyMessage} ${copied && classes.showCopyMessage}`}>
                         <h1>Copied!</h1>
                         <p className={classes.copyText}>{background}</p>
